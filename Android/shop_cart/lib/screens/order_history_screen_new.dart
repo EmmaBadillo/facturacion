@@ -119,75 +119,88 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Paleta moderna
+    const Color primary = Color(0xFF1e40af);
+    const Color accent = Color(0xFF059669);
+    const Color bgCard = Color(0xFFFFFFFF);
+    const Color bgMuted = Color(0xFFf1f5f9);
+    const Color textPrimary = Color(0xFF0f172a);
+    const Color textSecondary = Color(0xFF475569);
+    const Color textMuted = Color(0xFF64748b);
+    const Color border = Color(0xFFe2e8f0);
+    const Color borderFocus = Color(0xFF3b82f6);
+    const Color error = Color(0xFFef4444);
+
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: bgMuted,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Historial de Órdenes',
           style: TextStyle(
-            color: AppColors.backgroundLight,
-            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.2,
           ),
         ),
-        backgroundColor: Color(0xFF1A237E),
-        foregroundColor: AppColors.backgroundLight,
+        backgroundColor: primary,
+        foregroundColor: Colors.white,
         elevation: 0,
+        centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh, color: AppColors.backgroundLight),
+            icon: const Icon(Icons.refresh, color: Colors.white),
             onPressed: _loadOrderHistory,
             tooltip: 'Actualizar',
           ),
         ],
       ),
-      body:
-          _isLoading
-              ? Center(
-                child: CircularProgressIndicator(color: AppColors.primaryColor),
-              )
-              : _error != null
-              ? _buildErrorState()
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(color: accent),
+            )
+          : _error != null
+              ? _buildErrorState(primary, accent, bgCard, border, error, textPrimary, textSecondary)
               : _orders.isEmpty
-              ? _buildEmptyState()
-              : _buildOrdersList(),
+                  ? _buildEmptyState(primary, accent, bgCard, textPrimary, textSecondary)
+                  : _buildOrdersList(primary, accent, bgCard, border, textPrimary, textSecondary, textMuted),
     );
   }
 
-  Widget _buildErrorState() {
+  Widget _buildErrorState(Color primary, Color accent, Color bgCard, Color border, Color error, Color textPrimary, Color textSecondary) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, size: 80, color: Colors.red.shade400),
+            Icon(Icons.error_outline, size: 80, color: error),
             const SizedBox(height: 24),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.red.shade200),
+                color: error.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: error.withOpacity(0.18)),
               ),
               child: Column(
                 children: [
                   Text(
                     'Error al cargar el historial',
                     style: TextStyle(
-                      color: AppColors.textPrimary,
+                      color: textPrimary,
                       fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     _error!.replaceAll('Exception: ', ''),
                     style: TextStyle(
-                      color: AppColors.textSecondary,
+                      color: textSecondary,
                       fontSize: 14,
                     ),
                     textAlign: TextAlign.center,
@@ -198,15 +211,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _loadOrderHistory,
-              icon: const Icon(Icons.refresh),
-              label: const Text('Reintentar'),
+              icon: const Icon(Icons.refresh, color: Colors.white),
+              label: const Text('Reintentar', style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primaryColor,
-                foregroundColor: AppColors.backgroundLight,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
+                backgroundColor: primary,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                elevation: 0,
               ),
             ),
           ],
@@ -215,7 +227,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(Color primary, Color accent, Color bgCard, Color textPrimary, Color textSecondary) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -223,44 +235,43 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(26),
               decoration: BoxDecoration(
-                color: AppColors.primaryColor.withOpacity(0.1),
+                color: primary.withOpacity(0.10),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.shopping_bag_outlined,
                 size: 80,
-                color: AppColors.primaryColor,
+                color: primary,
               ),
             ),
             const SizedBox(height: 24),
             Text(
               'No tienes órdenes aún',
               style: TextStyle(
-                color: AppColors.textPrimary,
+                color: textPrimary,
                 fontSize: 24,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w800,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'Tus compras aparecerán aquí cuando realices tu primera orden',
-              style: TextStyle(color: AppColors.textSecondary, fontSize: 16),
+              style: TextStyle(color: textSecondary, fontSize: 16),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
             ElevatedButton.icon(
               onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(Icons.shopping_cart),
-              label: const Text('Ir de Compras'),
+              icon: const Icon(Icons.shopping_cart, color: Colors.white),
+              label: const Text('Ir de Compras', style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.accentColor,
-                foregroundColor: AppColors.backgroundLight,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
+                backgroundColor: accent,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                elevation: 0,
               ),
             ),
           ],
@@ -269,71 +280,60 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     );
   }
 
-  Widget _buildOrdersList() {
+  Widget _buildOrdersList(Color primary, Color accent, Color bgCard, Color border, Color textPrimary, Color textSecondary, Color textMuted) {
     return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(18.0),
       itemCount: _orders.length,
       itemBuilder: (context, index) {
         final order = _orders[index];
-        if (order is Map<String, dynamic>) {
-          order.forEach((key, value) {
-            if (value is Map || value is List) {
-            }
-          });
-        } else {
-        }
-        return _buildOrderCard(order, index);
+        return _buildOrderCard(order, index, primary, accent, bgCard, border, textPrimary, textSecondary, textMuted);
       },
     );
   }
 
-  Widget _buildOrderCard(dynamic order, int index) {
+  Widget _buildOrderCard(dynamic order, int index, Color primary, Color accent, Color bgCard, Color border, Color textPrimary, Color textSecondary, Color textMuted) {
     final orderId = _getOrderId(order);
     final date = _getOrderDate(order);
     final total = _getOrderTotal(order);
     final status = _getOrderStatus(order);
     final productCountText = _getProductCountText(orderId);
 
-    const Color primaryBlue = Color(0xFF1A237E);
-    const Color accentGreen = Color(0xFF43A047);
-    const Color cardGray = Color(0xFFE3E6EA);
-    const Color borderGray = Color(0xFFB0BEC5);
-
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: cardGray, width: 1),
+        color: bgCard,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: border, width: 1.1),
         boxShadow: [
           BoxShadow(
-            color: borderGray.withOpacity(0.07),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: border.withOpacity(0.13),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Material(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
         child: InkWell(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(16),
           onTap: () => _navigateToOrderDetail(order),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Ícono de orden
                 Container(
-                  width: 44,
-                  height: 44,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
-                    color: accentGreen.withOpacity(0.13),
+                    color: accent.withOpacity(0.13),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.receipt_long, color: accentGreen, size: 26),
+                  child: Icon(Icons.receipt_long, color: accent, size: 28),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 16),
                 // Info principal
                 Expanded(
                   child: Column(
@@ -342,9 +342,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       Text(
                         'Orden #$orderId',
                         style: TextStyle(
-                          color: primaryBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                          color: primary,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
                           letterSpacing: 0.1,
                         ),
                       ),
@@ -352,37 +352,39 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       Text(
                         date,
                         style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 12.5,
+                          color: textMuted,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 7),
                       Row(
                         children: [
-                          Icon(Icons.shopping_cart, size: 15, color: borderGray),
+                          Icon(Icons.shopping_cart, size: 16, color: textMuted),
                           const SizedBox(width: 4),
                           Text(
                             productCountText,
                             style: TextStyle(
-                              color: borderGray,
-                              fontSize: 12.5,
+                              color: textMuted,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: 12),
                           Icon(
                             status.toLowerCase().contains('complet')
                                 ? Icons.check_circle
                                 : Icons.timelapse,
-                            size: 15,
-                            color: accentGreen,
+                            size: 16,
+                            color: accent,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             status,
                             style: TextStyle(
-                              color: accentGreen,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                              color: accent,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ],
@@ -395,9 +397,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                       decoration: BoxDecoration(
-                        color: primaryBlue,
+                        color: primary,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -405,30 +407,31 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          fontSize: 15,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 10),
                     SizedBox(
-                      height: 28,
+                      height: 32,
                       child: OutlinedButton.icon(
                         onPressed: () => _navigateToOrderDetail(order),
-                        icon: Icon(Icons.visibility, color: primaryBlue, size: 16),
+                        icon: Icon(Icons.visibility, color: primary, size: 17),
                         label: Text(
                           'Ver',
                           style: TextStyle(
-                            color: primaryBlue,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
+                            color: primary,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13,
                           ),
                         ),
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: primaryBlue.withOpacity(0.3)),
+                          side: BorderSide(color: primary.withOpacity(0.18)),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          elevation: 0,
                         ),
                       ),
                     ),

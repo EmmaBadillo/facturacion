@@ -32,55 +32,99 @@ class PaginationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryBlue = Color(0xFF1A237E);
-    const Color accentGreen = Color(0xFF43A047);
-    const Color borderGray = Color(0xFFB0BEC5);
+    // Paleta moderna
+    const Color primary = Color(0xFF1e40af);
+    const Color accent = Color(0xFF059669);
+    const Color bgCard = Color(0xFFFFFFFF);
+    const Color bgMuted = Color(0xFFf1f5f9);
+    const Color textPrimary = Color(0xFF0f172a);
+    const Color textMuted = Color(0xFF64748b);
+    const Color border = Color(0xFFe2e8f0);
+    const Color borderFocus = Color(0xFF3b82f6);
 
     final pages = _buildPageNumbers();
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          IconButton(
-            icon: Icon(Icons.chevron_left, color: primaryBlue, size: 22),
-            tooltip: 'Anterior',
-            onPressed: currentPage > 1 ? () => onPageChange(currentPage - 1) : null,
+          // Botón anterior
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: currentPage > 1 ? () => onPageChange(currentPage - 1) : null,
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: currentPage > 1 ? bgMuted : bgCard,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: border, width: 1),
+                ),
+                child: Icon(Icons.chevron_left, color: currentPage > 1 ? primary : border, size: 22),
+              ),
+            ),
           ),
           ...pages.map((page) {
             if (page == null) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: Text('...', style: TextStyle(color: borderGray, fontSize: 13)),
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: Text('...', style: TextStyle(color: textMuted, fontSize: 14, fontWeight: FontWeight.w500)),
               );
             }
+            final bool isCurrent = page == currentPage;
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-              child: ElevatedButton(
-                onPressed: page == currentPage ? null : () => onPageChange(page),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: page == currentPage ? accentGreen : Colors.white,
-                  foregroundColor: page == currentPage ? Colors.white : primaryBlue,
-                  minimumSize: const Size(32, 32),
-                  padding: EdgeInsets.zero,
-                  elevation: page == currentPage ? 2 : 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    side: BorderSide(color: borderGray),
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Material(
+                color: isCurrent ? accent : bgCard,
+                borderRadius: BorderRadius.circular(8),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8),
+                  onTap: isCurrent ? null : () => onPageChange(page),
+                  child: Container(
+                    width: 36,
+                    height: 36,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: isCurrent ? accent : border, width: 1.2),
+                      boxShadow: isCurrent
+                          ? [BoxShadow(color: accent.withOpacity(0.13), blurRadius: 8, offset: Offset(0,2))]
+                          : [],
+                    ),
+                    child: Text(
+                      '$page',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: isCurrent ? Colors.white : primary,
+                        letterSpacing: 0.1,
+                      ),
+                    ),
                   ),
-                ),
-                child: Text(
-                  '$page',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                 ),
               ),
             );
           }).toList(),
-          IconButton(
-            icon: Icon(Icons.chevron_right, color: primaryBlue, size: 22),
-            tooltip: 'Siguiente',
-            onPressed: currentPage < totalPages ? () => onPageChange(currentPage + 1) : null,
+          // Botón siguiente
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: currentPage < totalPages ? () => onPageChange(currentPage + 1) : null,
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: currentPage < totalPages ? bgMuted : bgCard,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: border, width: 1),
+                ),
+                child: Icon(Icons.chevron_right, color: currentPage < totalPages ? primary : border, size: 22),
+              ),
+            ),
           ),
         ],
       ),

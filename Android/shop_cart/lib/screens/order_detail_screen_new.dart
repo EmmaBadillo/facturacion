@@ -75,42 +75,47 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Paleta moderna
+    const Color primary = Color(0xFF1e40af);
+    const Color accent = Color(0xFF059669);
+    const Color bgCard = Color(0xFFFFFFFF);
+    const Color bgMuted = Color(0xFFf1f5f9);
+    const Color textPrimary = Color(0xFF0f172a);
+    const Color textSecondary = Color(0xFF475569);
+    const Color textMuted = Color(0xFF64748b);
+    const Color border = Color(0xFFe2e8f0);
+    const Color borderFocus = Color(0xFF3b82f6);
+    const Color error = Color(0xFFef4444);
+
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: bgMuted,
       appBar: AppBar(
         title: Text(
           'Detalle de Orden #${_getOrderId()}',
-          style: TextStyle(
-            color: AppColors.backgroundLight,
-            fontWeight: FontWeight.w600,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.2,
           ),
         ),
-        backgroundColor:  Color(0xFF1A237E),
-        foregroundColor: AppColors.backgroundLight,
+        backgroundColor: primary,
+        foregroundColor: Colors.white,
         elevation: 0,
+        centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
+              child: CircularProgressIndicator(color: accent),
             )
-          : _buildContent(),
+          : _buildContent(primary, accent, bgCard, border, textPrimary, textSecondary, textMuted),
     );
   }
 
-  Widget _buildContent() {
-    // Paleta contable
-    const Color primaryBlue = Color(0xFF1A237E);
-    const Color accentGreen = Color(0xFF43A047);
-    const Color lightGray = Color(0xFFF5F5F5);
-    const Color cardGray = Color(0xFFE3E6EA);
-    const Color borderGray = Color(0xFFB0BEC5);
-
+  Widget _buildContent(Color primary, Color accent, Color bgCard, Color border, Color textPrimary, Color textSecondary, Color textMuted) {
     final orderId = _getOrderId();
     final orderDate = _formatFullDate(_getOrderDate());
     final orderStatus = _getOrderStatus();
@@ -118,28 +123,25 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     final productCount = _getProductCount();
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  primaryBlue.withOpacity(0.98),
-                  accentGreen.withOpacity(0.93),
-                ],
+                colors: [primary.withOpacity(0.98), accent.withOpacity(0.93)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(18),
               boxShadow: [
                 BoxShadow(
-                  color: primaryBlue.withOpacity(0.10),
-                  blurRadius: 8,
+                  color: primary.withOpacity(0.10),
+                  blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
               ],
@@ -147,28 +149,28 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: lightGray.withOpacity(0.18),
-                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white.withOpacity(0.13),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
                     Icons.receipt_long,
-                    color: lightGray,
-                    size: 28,
+                    color: Colors.white,
+                    size: 30,
                   ),
                 ),
-                const SizedBox(width: 14),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Orden #$orderId',
-                        style: TextStyle(
-                          color: lightGray,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
                           letterSpacing: 0.2,
                         ),
                       ),
@@ -176,23 +178,23 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       Text(
                         orderDate,
                         style: TextStyle(
-                          color: lightGray.withOpacity(0.92),
-                          fontSize: 13.5,
+                          color: Colors.white.withOpacity(0.92),
+                          fontSize: 14,
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 7),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: lightGray.withOpacity(0.18),
+                          color: Colors.white.withOpacity(0.13),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
                           orderStatus,
-                          style: TextStyle(
-                            color: lightGray,
-                            fontSize: 12.5,
-                            fontWeight: FontWeight.w600,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
@@ -202,20 +204,20 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 22),
 
           // Info en dos columnas
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 14),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: borderGray.withOpacity(0.45)),
+              color: bgCard,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: border.withOpacity(0.55)),
               boxShadow: [
                 BoxShadow(
-                  color: primaryBlue.withOpacity(0.04),
-                  blurRadius: 4,
+                  color: primary.withOpacity(0.04),
+                  blurRadius: 6,
                   offset: const Offset(0, 2),
                 ),
               ],
@@ -226,48 +228,48 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Fecha', style: TextStyle(color: borderGray, fontSize: 13)),
+                      Text('Fecha', style: TextStyle(color: textMuted, fontSize: 13)),
                       const SizedBox(height: 2),
-                      Text(orderDate, style: TextStyle(color: primaryBlue, fontWeight: FontWeight.w600, fontSize: 15)),
-                      const SizedBox(height: 12),
-                      Text('Estado', style: TextStyle(color: borderGray, fontSize: 13)),
+                      Text(orderDate, style: TextStyle(color: primary, fontWeight: FontWeight.w700, fontSize: 16)),
+                      const SizedBox(height: 14),
+                      Text('Estado', style: TextStyle(color: textMuted, fontSize: 13)),
                       const SizedBox(height: 2),
-                      Text(orderStatus, style: TextStyle(color: accentGreen, fontWeight: FontWeight.w600, fontSize: 15)),
+                      Text(orderStatus, style: TextStyle(color: accent, fontWeight: FontWeight.w700, fontSize: 16)),
                     ],
                   ),
                 ),
-                Container(width: 1, height: 54, color: cardGray),
+                Container(width: 1, height: 60, color: border.withOpacity(0.5)),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Total', style: TextStyle(color: borderGray, fontSize: 13)),
+                      Text('Total', style: TextStyle(color: textMuted, fontSize: 13)),
                       const SizedBox(height: 2),
-                      Text('\$$orderTotal', style: TextStyle(color: accentGreen, fontWeight: FontWeight.bold, fontSize: 16)),
-                      const SizedBox(height: 12),
-                      Text('Productos', style: TextStyle(color: borderGray, fontSize: 13)),
+                      Text('\$$orderTotal', style: TextStyle(color: accent, fontWeight: FontWeight.bold, fontSize: 17)),
+                      const SizedBox(height: 14),
+                      Text('Productos', style: TextStyle(color: textMuted, fontSize: 13)),
                       const SizedBox(height: 2),
-                      Text('$productCount', style: TextStyle(color: primaryBlue, fontWeight: FontWeight.w600, fontSize: 15)),
+                      Text('$productCount', style: TextStyle(color: primary, fontWeight: FontWeight.w700, fontSize: 16)),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 22),
 
           // Lista de productos
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: borderGray.withOpacity(0.45)),
+              color: bgCard,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: border.withOpacity(0.55)),
               boxShadow: [
                 BoxShadow(
-                  color: primaryBlue.withOpacity(0.04),
-                  blurRadius: 4,
+                  color: primary.withOpacity(0.04),
+                  blurRadius: 6,
                   offset: const Offset(0, 2),
                 ),
               ],
@@ -278,23 +280,23 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 Text(
                   'Productos Ordenados',
                   style: TextStyle(
-                    color: primaryBlue,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    color: primary,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(height: 10),
-                ..._getOrderItems().map((product) => _buildProductItem(product)).toList(),
+                const SizedBox(height: 12),
+                ..._getOrderItems().map((product) => _buildProductItemModern(product, primary, accent, border, textPrimary, textMuted)).toList(),
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 22),
 
           // Resumen de totales
-          _buildOrderSummaryCard(),
+          _buildOrderSummaryCardModern(primary, accent, bgCard, border, textPrimary, textMuted),
 
           // Botón de recibo
-          const SizedBox(height: 24),
+          const SizedBox(height: 28),
           Center(
             child: ReceiptPrintButton(
               orderData: _orderDetails ?? widget.order,
@@ -305,11 +307,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     );
   }
 
-  Widget _buildProductItem(dynamic product) {
-    const Color primaryBlue = Color(0xFF1A237E);
-    const Color accentGreen = Color(0xFF43A047);
-    const Color cardGray = Color(0xFFE3E6EA);
-
+  Widget _buildProductItemModern(dynamic product, Color primary, Color accent, Color border, Color textPrimary, Color textMuted) {
     final name = product['Name'] ?? product['name'] ?? product['productName'] ?? 'Producto';
     final quantity = product['Quantity'] ?? product['quantity'] ?? 1;
     final price = product['Price'] ?? product['price'] ?? product['unitPrice'] ?? 0;
@@ -317,49 +315,50 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     final imageUrl = product['ImageUrl'] ?? product['imageUrl'] ?? product['image'] ?? product['Image'];
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 7),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: cardGray,
-        borderRadius: BorderRadius.circular(10),
+        color: primary.withOpacity(0.06),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: border.withOpacity(0.45)),
       ),
       child: Row(
         children: [
           // Imagen del producto
           Container(
-            width: 48,
-            height: 48,
+            width: 52,
+            height: 52,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: primaryBlue.withOpacity(0.13),
+                color: primary.withOpacity(0.13),
               ),
             ),
             child: imageUrl != null && imageUrl.toString().isNotEmpty
                 ? ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.network(
                       imageUrl.toString(),
-                      width: 48,
-                      height: 48,
+                      width: 52,
+                      height: 52,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Icon(
                           Icons.inventory_2,
-                          color: primaryBlue,
-                          size: 24,
+                          color: primary,
+                          size: 26,
                         );
                       },
                     ),
                   )
                 : Icon(
                     Icons.inventory_2,
-                    color: primaryBlue,
-                    size: 24,
+                    color: primary,
+                    size: 26,
                   ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -367,9 +366,9 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 Text(
                   name,
                   style: TextStyle(
-                    color: primaryBlue,
-                    fontSize: 14.5,
-                    fontWeight: FontWeight.w600,
+                    color: primary,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -378,8 +377,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 Text(
                   'Cantidad: $quantity',
                   style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 12.5,
+                    color: textMuted,
+                    fontSize: 13,
                   ),
                 ),
                 if (price > 0) ...[
@@ -387,8 +386,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   Text(
                     'Unitario: \$${_formatPrice(price)}',
                     style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 12,
+                      color: textMuted,
+                      fontSize: 12.5,
                     ),
                   ),
                 ],
@@ -396,17 +395,17 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
             decoration: BoxDecoration(
-              color: accentGreen.withOpacity(0.11),
+              color: accent.withOpacity(0.13),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: accentGreen.withOpacity(0.22)),
+              border: Border.all(color: accent.withOpacity(0.22)),
             ),
             child: Text(
               '\$${_formatPrice(total)}',
               style: TextStyle(
-                color: accentGreen,
-                fontSize: 14.5,
+                color: accent,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -416,35 +415,37 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     );
   }
 
-  Widget _buildOrderSummaryCard() {
+  Widget _buildOrderSummaryCardModern(Color primary, Color accent, Color bgCard, Color border, Color textPrimary, Color textMuted) {
     final subtotal = _getOrderSubtotal();
     final tax = _getOrderTax();
     final total = _getOrderTotal();
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.borderColor),
+        color: bgCard,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: border.withOpacity(0.55)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryColor,
-            blurRadius: 4,
+            color: primary.withOpacity(0.04),
+            blurRadius: 6,
             offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Column(
         children: [
-          _buildSummaryRow('Subtotal:', '\$${_formatPrice(subtotal)}'),
+          _buildSummaryRowModern('Subtotal:', '\$${_formatPrice(subtotal)}', textPrimary, textMuted),
           const SizedBox(height: 8),
-          _buildSummaryRow('Impuestos:', '\$${_formatPrice(tax)}'),
+          _buildSummaryRowModern('Impuestos:', '\$${_formatPrice(tax)}', textPrimary, textMuted),
           const Divider(height: 20),
-          _buildSummaryRow(
+          _buildSummaryRowModern(
             'Total:',
             '\$${_formatPrice(total)}',
+            accent,
+            textMuted,
             isTotal: true,
           ),
         ],
@@ -452,22 +453,22 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     );
   }
 
-  Widget _buildSummaryRow(String label, String value, {bool isTotal = false}) {
+  Widget _buildSummaryRowModern(String label, String value, Color textColor, Color textMuted, {bool isTotal = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           label,
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: isTotal ? textColor : textMuted,
             fontSize: isTotal ? 18 : 16,
-            fontWeight: isTotal ? FontWeight.bold : FontWeight.w500,
+            fontWeight: isTotal ? FontWeight.bold : FontWeight.w600,
           ),
         ),
         Text(
           value,
           style: TextStyle(
-            color: isTotal ? AppColors.accentColor : AppColors.textPrimary,
+            color: isTotal ? textColor : textMuted,
             fontSize: isTotal ? 18 : 16,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.w600,
           ),
