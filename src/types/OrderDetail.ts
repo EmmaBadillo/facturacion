@@ -1,4 +1,5 @@
 export interface OrderDetail {
+  ProductId: ReactNode
   OrderDetailId: number
   Name: string
   Quantity: number

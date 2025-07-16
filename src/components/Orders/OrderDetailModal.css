@@ -227,13 +227,25 @@
 .products-table .quantity {
   font-weight: 600;
   color: var(--primary);
+  text-align: center;
 }
 
 .products-table .price {
   font-weight: 600;
   color: var(--accent);
+  text-align: end;
 }
-
+.products-table .price-th{
+  text-align: end;
+}
+.products-table .quantity-th {
+  text-align: center;
+}
+.action-buttons-enhanced{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
 /* Sección financiera */
 .financial-section-enhanced {
   margin-bottom: 25px;

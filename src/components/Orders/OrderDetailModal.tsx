@@ -204,18 +204,18 @@ export default function OrderDetailModal({ order, onClose, onPrint, onDownloadPD
                 <table className="products-table">
                   <thead>
                     <tr>
-                      <th>Imagen</th>
+                      <th>Código</th>
                       <th>Producto</th>
-                      <th>Cantidad</th>
-                      <th>Precio Unit.</th>
-                      <th>Subtotal</th>
+                      <th className="quantity-th">Cantidad</th>
+                      <th className="price-th">Precio Unit.</th>
+                      <th className="price-th">Subtotal</th>
                     </tr>
                   </thead>
                   <tbody>
                     {orderDetails.map((item, index) => (
                       <tr key={index}>
                         <td>
-                          <img src={item.ImageUrl || "/placeholder.svg"} alt={item.Name} className="product-image" />
+                          # {item.ProductId}
                         </td>
                         <td>{item.Name}</td>
                         <td className="quantity">{item.Quantity}</td>

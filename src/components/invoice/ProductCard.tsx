@@ -32,6 +32,10 @@ export default function ProductCard({ product, quantity, onQuantityChange, onAdd
         {product.description && <p className="product-description">{product.description}</p>}
         <div className="product-details">
           <div className="price-section">
+            Código de producto: 
+            <span className="price">{product.id}</span>
+          </div>
+          <div className="price-section">
             <DollarSign size={16} />
             <span className="price">${product.price.toFixed(2)}</span>
           </div>

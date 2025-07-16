@@ -119,6 +119,10 @@ export const generatePrintContent = (orderInfo: Order, details: OrderDetail[]) =
                 .price {
                   font-weight: 600;
                   color: #059669; /* Usando accent color */
+                  text-align: end;
+                }
+                 table .price-th {
+                  text-align: end;
                 }
                 .financial-section {
                   margin-top: 40px;
@@ -151,6 +155,9 @@ export const generatePrintContent = (orderInfo: Order, details: OrderDetail[]) =
                 .total-label {
                   color: #0f172a; /* Usando text-primary */
                 }
+                  .quantity{
+                  text-align: center;
+                  }
                 .total-value {
                   color: #059669; /* Usando accent color */
                 }
@@ -171,7 +178,6 @@ export const generatePrintContent = (orderInfo: Order, details: OrderDetail[]) =
             <body>
               <div class="invoice-container">
                 <div class="header">
-                  <div class="company-name">Aplicaciones Móviles</div>
                   <div class="invoice-title">FACTURA</div>
                   <div class="invoice-number">Orden #${orderInfo.orderId}</div>
                 </div>
@@ -193,10 +199,10 @@ export const generatePrintContent = (orderInfo: Order, details: OrderDetail[]) =
                     <div class="info-item">
                       <div class="info-label">Fecha</div>
                       <div class="info-value">${new Date(orderInfo.orderDate).toLocaleDateString("es-ES", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}</div>
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })}</div>
                     </div>
                   </div>
                   <div style="margin-top: 15px;">
@@ -209,27 +215,27 @@ export const generatePrintContent = (orderInfo: Order, details: OrderDetail[]) =
                   <table class="products-table">
                     <thead>
                       <tr>
-                        <th>Imagen</th>
+                        <th>Código</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
-                        <th>Precio Unit.</th>
-                        <th>Subtotal</th>
+                        <th class="price-th">Precio Unit.</th>
+                        <th class="price-th">Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
                       ${details
-                        .map(
-                          (item) => `
+      .map(
+        (item) => `
                           <tr>
-                            <td><img src="${item.ImageUrl || "/placeholder.svg"}" alt="${item.Name}" class="product-image" /></td>
+                            <td># ${item.ProductId}</td>
                             <td class="product-name">${item.Name}</td>
-                            <td>${item.Quantity}</td>
+                            <td class="quantity">${item.Quantity}</td>
                             <td class="price">$${item.UnitPrice.toFixed(2)}</td>
                             <td class="price">$${item.SubTotal.toFixed(2)}</td>
                           </tr>
                         `,
-                        )
-                        .join("")}
+      )
+      .join("")}
                     </tbody>
                   </table>
                 </div>

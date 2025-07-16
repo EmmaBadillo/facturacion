@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import type { Product } from "../../types/Product"
-import { Loader2, ImageOff, Folder, AlertTriangle, CheckCircle } from "lucide-react"
+import { Loader2, ImageOff, Folder, AlertTriangle, CheckCircle, Box } from "lucide-react"
 import "./ProductCard.css"
 
 interface ProductCardProps {
@@ -85,10 +85,16 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </h3>
           {product.category && (
-            <div className="product-category-tag">
-              <Folder size={12} />
-              <span>{product.category}</span>
-            </div>
+            <>
+              <div className="product-category-tag">
+                Código de producto:
+                <span>{product.id}</span>
+              </div>
+              <div className="product-category-tag">
+                <Folder size={12} />
+                <span>{product.category}</span>
+              </div>
+            </>
           )}
         </header>
 

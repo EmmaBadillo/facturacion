@@ -43,6 +43,7 @@ export default function InvoiceForm({
               <div key={item.product.id} className="invoice-item">
                 <div className="item-info">
                   <h5>{item.product.name}</h5>
+                  <p className="item-price">Código:{item.product.id}</p>
                   <p className="item-price">${item.product.price.toFixed(2)} c/u</p>
                   <p className="item-stock">Stock disponible: {item.product.stock}</p>
                 </div>
