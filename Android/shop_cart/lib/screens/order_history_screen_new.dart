@@ -362,12 +362,15 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                         children: [
                           Icon(Icons.shopping_cart, size: 16, color: textMuted),
                           const SizedBox(width: 4),
-                          Text(
-                            productCountText,
-                            style: TextStyle(
-                              color: textMuted,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
+                          Flexible(
+                            child: Text(
+                              productCountText,
+                              style: TextStyle(
+                                color: textMuted,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -379,12 +382,15 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                             color: accent,
                           ),
                           const SizedBox(width: 4),
-                          Text(
-                            status,
-                            style: TextStyle(
-                              color: accent,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
+                          Flexible(
+                            child: Text(
+                              status,
+                              style: TextStyle(
+                                color: accent,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
