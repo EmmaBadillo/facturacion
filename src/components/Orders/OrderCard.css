@@ -1,0 +1,267 @@
+/* Tarjeta de pedido */
+.order-card-enhanced {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative; /* Para el pseudo-elemento de hover */
+}
+
+.order-card-enhanced:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+/* Pseudo-elemento para un efecto de borde al pasar el ratón */
+.order-card-enhanced::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-out;
+}
+
+.order-card-enhanced:hover::before {
+  transform: scaleX(1);
+}
+
+/* Header de la tarjeta */
+.order-header-enhanced {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-muted);
+  border-top-left-radius: 11px; /* Ajuste para que coincida con el borde del padre */
+  border-top-right-radius: 11px;
+}
+
+.order-id-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.order-id-section svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.order-id {
+  letter-spacing: 0.5px;
+}
+
+.order-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* Sección de información del cliente */
+.customer-info-section {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente si hay espacio */
+}
+
+.customer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start; /* Alinea el icono con la primera línea de texto */
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.detail-row svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+  margin-top: 2px; /* Ajuste visual para alinear con el texto */
+}
+
+.detail-text {
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+/* Sección financiera */
+.order-financial-section {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-card);
+}
+
+.financial-row-od {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.financial-row-od:last-child {
+  margin-bottom: 0;
+}
+
+.financial-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.financial-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.financial-row-od.total-row {
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.total-amount {
+  color: var(--primary);
+  font-size: 18px; /* Un poco más grande para el total */
+}
+
+/* Sección de acciones */
+.order-actions-enhanced {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 16px;
+  background-color: var(--bg-muted);
+  border-top: 1px solid var(--border);
+  gap: 8px;
+  border-bottom-left-radius: 11px; /* Ajuste para que coincida con el borde del padre */
+  border-bottom-right-radius: 11px;
+}
+
+.action-btn-enhanced-od {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  flex: 1;
+  min-width: 0; /* Permite que los botones se encojan en pantallas pequeñas */
+}
+
+.action-btn-enhanced-od.view-btn {
+  background: var(--primary);
+  color: var(--text-white);
+}
+
+.action-btn-enhanced-od.view-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-enhanced-od.print-btn {
+  background: var(--secondary);
+  color: var(--text-white);
+}
+
+.action-btn-enhanced-od.print-btn:hover {
+  background: #5a677b;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-enhanced-od.download-btn {
+  background: var(--accent);
+  color: var(--text-white);
+}
+
+.action-btn-enhanced-od.download-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .order-card-enhanced {
+    padding: 0;
+  }
+
+  .order-header-enhanced {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .order-id-section {
+    font-size: 15px;
+  }
+
+  .order-date {
+    font-size: 11px;
+  }
+
+  .customer-info-section {
+    padding: 14px;
+  }
+
+  .detail-row {
+    font-size: 12px;
+  }
+
+  .order-financial-section {
+    padding: 14px;
+  }
+
+  .financial-row-od {
+    font-size: 13px;
+  }
+
+  .financial-row-od.total-row {
+    font-size: 15px;
+  }
+
+  .order-actions-enhanced {
+    padding: 10px 14px;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .action-btn-enhanced-od {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}

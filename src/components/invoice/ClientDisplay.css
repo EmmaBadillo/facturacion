@@ -1,0 +1,126 @@
+.client-display {
+  background-color: #ffffff;
+  border-radius: 10px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 16px; 
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+  border: 1px solid #e5e5e5; 
+  height: fit-content;
+}
+
+.client-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px; 
+  border-bottom: 1px solid #f5f5f5; 
+}
+
+.client-title {
+  display: flex;
+  align-items: center;
+  gap: 6px; 
+  color: #333;
+}
+
+.client-title .title-icon {
+  color: #379d3a; 
+  font-size: 18px; 
+}
+
+.client-title h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.edit-client-btn {
+  background-color: #f8f8f8; 
+  color: #666; /* Color de texto más suave */
+  border: 1px solid #ddd; /* Borde más suave */
+  border-radius: 6px; /* Más redondeado */
+  padding: 6px 10px; /* Más compacto */
+  font-size: 0.8rem; /* Fuente más pequeña */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Espacio entre icono y texto reducido */
+}
+
+.edit-client-btn:hover {
+  background-color: #eee;
+  border-color: #ccc;
+  color: #333;
+}
+
+.edit-client-btn:active {
+  transform: translateY(1px);
+}
+
+.client-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Columnas más compactas */
+  gap: 8px; /* Espacio entre tarjetas de detalle reducido */
+}
+
+.detail-card {
+  background-color: #fdfdfd;
+  border: 1px solid #f0f0f0; /* Borde más suave */
+  border-radius: 6px; /* Más redondeado */
+  padding: 8px; /* Más compacto */
+  display: flex;
+  flex-direction: column;
+  gap: 4px; 
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Espacio entre icono y label reducido */
+  color: #999; /* Color de texto más suave */
+  font-size: 0.75rem; /* Fuente más pequeña */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px; /* Letras más ajustadas */
+}
+
+.detail-header .detail-icon {
+  color: #379d3a; /* Color primario */
+  font-size: 14px; /* Icono más pequeño */
+  flex-shrink: 0;
+}
+
+.detail-value {
+  font-size: 0.85rem; /* Fuente más pequeña */
+  font-weight: 600;
+  color: #444; /* Color de texto más oscuro para contraste */
+  word-break: break-word;
+}
+
+.address-card {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .client-display {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .client-title h3 {
+    font-size: 0.95rem;
+  }
+
+  .edit-client-btn {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+
+  .client-details-grid {
+    grid-template-columns: 1fr;
+  }
+}

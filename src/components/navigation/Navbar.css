@@ -1,0 +1,290 @@
+/* Estilos generales de la barra de navegación */
+.app-navbar {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 0 20px;
+  height: 64px; /* Altura fija para la barra de navegación */
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Ancho máximo para el contenido */
+  margin: 0 auto;
+}
+
+/* Sección de marca/logo */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.brand-icon {
+  color: var(--primary);
+}
+
+/* Enlaces de navegación de escritorio */
+.navbar-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links-desktop {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 24px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+.nav-link.active {
+  background-color: var(--primary);
+  color: var(--text-white);
+}
+
+.nav-link.active:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Sección derecha (logout y toggle móvil) */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.user-greeting {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.logout-button-desktop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--error);
+  color: var(--text-white);
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-button-desktop:hover {
+  background-color: #dc2626; /* Un rojo más oscuro */
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.menu-toggle {
+  display: none; /* Oculto por defecto en escritorio */
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.menu-toggle:hover {
+  background-color: var(--bg-muted);
+}
+
+/* Menú móvil (offcanvas) */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -280px; /* Oculto por defecto */
+  width: 260px;
+  height: 100%;
+  background-color: var(--bg-card);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  transition: left 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.mobile-menu-open {
+  left: 0; /* Visible */
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-brand-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.mobile-close-button {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.mobile-close-button:hover {
+  background-color: var(--bg-muted);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  background-color: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+.mobile-logout-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 15px;
+  background-color: var(--error);
+  color: var(--text-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 30px;
+}
+
+.mobile-logout-button:hover {
+  background-color: #dc2626;
+}
+
+/* Overlay para el menú móvil */
+.navbar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.navbar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Estilos para el body cuando el menú móvil está abierto (para evitar scroll) */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-links-desktop,
+  .logout-button-desktop,
+  .user-greeting {
+    display: none; /* Ocultar elementos de escritorio */
+  }
+
+  .menu-toggle {
+    display: flex; /* Mostrar el botón de menú móvil */
+  }
+
+  .app-navbar {
+    padding: 0 16px;
+  }
+
+  .navbar-brand {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-navbar {
+    height: 56px;
+  }
+
+  .navbar-brand {
+    font-size: 15px;
+  }
+
+  .menu-toggle {
+    padding: 6px;
+  }
+
+  .mobile-menu {
+    width: 100%; 
+    max-width: 260px; 
+  }
+}

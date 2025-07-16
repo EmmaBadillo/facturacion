@@ -1,0 +1,222 @@
+/* ClientModal.css */
+.client-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.client-modal__content {
+  background-color: var(--bg-card);
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.client-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-muted);
+}
+
+.client-modal__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.client-modal__close-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.client-modal__close-btn:hover {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
+
+.client-modal__close-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.client-modal__form {
+  padding: 25px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.client-modal__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.client-modal__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.client-modal__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.client-modal__input,
+.client-modal__textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--text-primary);
+  background-color: var(--bg-input);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.client-modal__input::placeholder,
+.client-modal__textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.client-modal__input:focus,
+.client-modal__textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  outline: none;
+}
+
+.client-modal__input.error,
+.client-modal__textarea.error {
+  border-color: var(--error);
+}
+
+.client-modal__input:disabled,
+.client-modal__textarea:disabled {
+  background-color: var(--bg-muted);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.client-modal__error {
+  font-size: 12px;
+  color: var(--error);
+  margin-top: 4px;
+}
+
+.show-password-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 5px;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.show-password-button:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-muted);
+}
+
+.client-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+.client-modal__cancel-btn,
+.client-modal__save-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.client-modal__cancel-btn {
+  background-color: var(--bg-muted);
+  color: var(--text-secondary);
+}
+
+.client-modal__cancel-btn:hover {
+  background-color: var(--border);
+}
+
+.client-modal__save-btn {
+  background-color: var(--primary);
+  color: var(--text-white);
+}
+
+.client-modal__save-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.client-modal__cancel-btn:disabled,
+.client-modal__save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.client-modal__button-spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid var(--text-white);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .client-modal__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .client-modal__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .client-modal__cancel-btn,
+  .client-modal__save-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

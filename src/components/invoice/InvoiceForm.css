@@ -1,0 +1,278 @@
+.invoice-form {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border: 1px solid #e0e0e0;
+}
+
+.invoice-summary h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2e3a2f;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #379d3a; /* Línea verde primaria */
+}
+
+.invoice-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.invoice-items h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #5f5f5f;
+  margin-bottom: 8px;
+}
+
+.no-items {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.no-items svg {
+  color: #ccc;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.invoice-item {
+  display: grid;
+  /* Definición de columnas: Nombre/Descripción, Cantidad, Subtotal, Eliminar */
+  grid-template-columns: 3fr 1.5fr 1fr auto;
+  align-items: center;
+  background-color: #fdfdfd;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  gap: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-info h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e3a2f;
+  margin: 0;
+}
+
+.item-price {
+  font-size: 0.9rem;
+  color: #379d3a; /* Color primario */
+  font-weight: 500;
+}
+
+.item-stock {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.quantity-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.quantity-btn {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #5f5f5f;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.quantity-btn:hover {
+  background-color: #e0e0e0;
+  color: #2e3a2f;
+}
+
+.quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  -moz-appearance: textfield;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.item-subtotal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  text-align: right;
+}
+
+.item-subtotal .item-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e3a2f;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #e74c3c; /* Rojo para eliminar */
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.remove-btn:hover {
+  background-color: #ffe6e6;
+  color: #c0392b;
+}
+
+.remove-btn:active {
+  transform: translateY(1px);
+}
+
+.invoice-total {
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.total-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #5f5f5f;
+}
+
+.total-line span:first-child {
+  font-weight: 500;
+}
+
+.total-line span:last-child {
+  font-weight: 600;
+  color: #2e3a2f;
+}
+
+.total-final {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #379d3a; /* Color primario */
+  border-top: 2px solid #379d3a;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.create-order-btn {
+  background-color: #379d3a; /* Color primario */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.create-order-btn:hover {
+  background-color: #2e8b30;
+  box-shadow: 0 4px 10px rgba(55, 157, 58, 0.3);
+}
+
+.create-order-btn:active {
+  transform: translateY(1px);
+}
+
+.create-order-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.create-order-btn .loading-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .invoice-item {
+    grid-template-columns: 1fr auto; /* Nombre y controles/subtotal */
+    gap: 10px;
+  }
+
+  .quantity-section {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .item-subtotal {
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+    text-align: right;
+    margin-top: 10px;
+  }
+
+  .remove-btn {
+    margin-left: 0;
+  }
+}
