@@ -286,7 +286,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                ..._getOrderItems().map((product) => _buildProductItemModern(product, primary, accent, border, textPrimary, textMuted)).toList(),
+                ..._getOrderItems().map((product) => _buildProductItemModern(product, primary, accent, border, textPrimary, textMuted)),
               ],
             ),
           ),

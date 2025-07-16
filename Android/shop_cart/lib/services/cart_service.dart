@@ -826,7 +826,7 @@ class CartService {
               child: pw.Text('\$${(item['SubTotal'] ?? 0.0).toStringAsFixed(2)}', textAlign: pw.TextAlign.right),
             ),
           ],
-        )).toList(),
+        )),
       ],
     );
   }

@@ -23,7 +23,7 @@ class ProductListScreenNew extends StatefulWidget {
   final Future<void> Function() onReloadCart;
 
   const ProductListScreenNew({
-    Key? key,
+    super.key,
     required this.onAddToCart,
     required this.onLogout,
     required this.cartItems,
@@ -32,7 +32,7 @@ class ProductListScreenNew extends StatefulWidget {
     required this.onDecreaseQuantity,
     required this.onClearCart,
     required this.onReloadCart,
-  }) : super(key: key);
+  });
 
   @override
   State<ProductListScreenNew> createState() => _ProductListScreenNewState();

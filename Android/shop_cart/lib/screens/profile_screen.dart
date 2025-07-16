@@ -8,7 +8,7 @@ import 'change_password_screen.dart';
 class ProfileScreen extends StatefulWidget {
   final VoidCallback? onLogout;
   
-  const ProfileScreen({Key? key, this.onLogout}) : super(key: key);
+  const ProfileScreen({super.key, this.onLogout});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();

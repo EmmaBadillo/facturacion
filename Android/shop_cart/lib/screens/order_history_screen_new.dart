@@ -517,7 +517,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           // Intentar otros formatos de fecha
           try {
             // Formato solo fecha sin hora
-            final date = DateTime.parse(dateStr.toString() + 'T00:00:00');
+            final date = DateTime.parse('${dateStr}T00:00:00');
             final result = DateFormat('dd/MM/yyyy').format(date);
             return result;
           } catch (e2) {

@@ -6,16 +6,18 @@ class PaginationWidget extends StatelessWidget {
   final void Function(int) onPageChange;
 
   const PaginationWidget({
-    Key? key,
+    super.key,
     required this.currentPage,
     required this.totalPages,
     required this.onPageChange,
-  }) : super(key: key);
+  });
 
   List<int?> _buildPageNumbers() {
     List<int?> pages = [];
     if (totalPages <= 7) {
-      for (int i = 1; i <= totalPages; i++) pages.add(i);
+      for (int i = 1; i <= totalPages; i++) {
+        pages.add(i);
+      }
     } else {
       pages.add(1);
       if (currentPage > 4) pages.add(null); // ...
@@ -23,7 +25,9 @@ class PaginationWidget extends StatelessWidget {
       int end = currentPage + 1;
       if (start < 2) start = 2;
       if (end > totalPages - 1) end = totalPages - 1;
-      for (int i = start; i <= end; i++) pages.add(i);
+      for (int i = start; i <= end; i++) {
+        pages.add(i);
+      }
       if (currentPage < totalPages - 3) pages.add(null); // ...
       pages.add(totalPages);
     }
@@ -107,7 +111,7 @@ class PaginationWidget extends StatelessWidget {
                 ),
               ),
             );
-          }).toList(),
+          }),
           // Botón siguiente
           Material(
             color: Colors.transparent,

@@ -5,7 +5,7 @@ import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   final void Function() onLoginSuccess;
-  const LoginScreen({Key? key, required this.onLoginSuccess}) : super(key: key);
+  const LoginScreen({super.key, required this.onLoginSuccess});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

@@ -4,7 +4,7 @@ import '../utils/validators.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback onRegisterSuccess;
-  const RegisterScreen({Key? key, required this.onRegisterSuccess}) : super(key: key);
+  const RegisterScreen({super.key, required this.onRegisterSuccess});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();

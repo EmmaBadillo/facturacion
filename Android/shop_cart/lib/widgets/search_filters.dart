@@ -117,7 +117,7 @@ class SearchFilters extends StatelessWidget {
                         value: category.id.toString(),
                         child: Text(category.name, style: const TextStyle(fontSize: 14, color: textPrimary, fontWeight: FontWeight.w500)),
                       );
-                    }).toList(),
+                    }),
                   ],
                   onChanged: (String? newValue) {
                     onCategoryChange(newValue == '' ? null : newValue);

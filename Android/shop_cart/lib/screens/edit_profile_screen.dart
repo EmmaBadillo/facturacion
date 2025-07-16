@@ -11,9 +11,9 @@ class EditProfileScreen extends StatefulWidget {
   final Client client;
 
   const EditProfileScreen({
-    Key? key,
+    super.key,
     required this.client,
-  }) : super(key: key);
+  });
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -809,8 +809,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancelar'),
             style: TextButton.styleFrom(foregroundColor: AppColors.textSecondary),
+            child: const Text('Cancelar'),
           ),
         ],
       ),

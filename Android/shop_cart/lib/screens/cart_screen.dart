@@ -78,8 +78,9 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
     );
-    if (res == true) widget.onRemove(item);
-    else {
+    if (res == true) {
+      widget.onRemove(item);
+    } else {
       // Restaurar cantidad a 1 si cancela
       _qtyControllers[item.product.productId]?.text = '1';
       await widget.onIncrease(item);

@@ -182,12 +182,8 @@ class ClientService {
 
       final decoded = JwtDecoder.decode(token);
       int? userId = decoded['userId'] as int?;
-      if (userId == null) {
-        userId = decoded['id'] as int?;
-      }
-      if (userId == null) {
-        userId = decoded['clientId'] as int?;
-      }
+      userId ??= decoded['id'] as int?;
+      userId ??= decoded['clientId'] as int?;
 
       if (userId == null) {
         throw Exception('No se pudo obtener el ID de usuario');
