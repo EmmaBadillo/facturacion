@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_cart/screens/reportes_correos_screen.dart';
 import 'dart:async';
 import '../models/product.dart';
 import '../models/cart_item.dart';
@@ -169,23 +170,14 @@ class _ProductListScreenNewState extends State<ProductListScreenNew> {
   Widget build(BuildContext context) {
     // Paleta moderna
     const Color primary = Color(0xFF1e40af);
-    const Color primaryHover = Color(0xFF1d4ed8);
-    const Color secondary = Color(0xFF64748b);
     const Color accent = Color(0xFF059669);
-    const Color accentHover = Color(0xFF047857);
     const Color bgMain = Color(0xFFf8fafc);
     const Color bgCard = Color(0xFFFFFFFF);
-    const Color bgInput = Color(0xFFFFFFFF);
     const Color bgMuted = Color(0xFFf1f5f9);
     const Color textPrimary = Color(0xFF0f172a);
     const Color textSecondary = Color(0xFF475569);
-    const Color textMuted = Color(0xFF64748b);
     const Color textWhite = Color(0xFFFFFFFF);
     const Color border = Color(0xFFe2e8f0);
-    const Color borderFocus = Color(0xFF3b82f6);
-    const Color success = Color(0xFF10b981);
-    const Color error = Color(0xFFef4444);
-    const Color warning = Color(0xFFf59e0b);
 
     final theme = Theme.of(context);
 
@@ -220,7 +212,21 @@ class _ProductListScreenNewState extends State<ProductListScreenNew> {
     }
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const ReportesCorreosScreen(),
+            ),
+          );
+        },
+        backgroundColor: const Color(0xFF1e40af),
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.mail_outline),
+        tooltip: 'Reportes de correos',
+      ),
       appBar: AppBar(
+// Importa la pantalla de reportes de correos
         title: const Text('Catálogo de Productos', style: TextStyle(fontWeight: FontWeight.w700, letterSpacing: 0.2)),
         backgroundColor: primary,
         foregroundColor: Colors.white,
@@ -560,13 +566,10 @@ class _ProductListScreenNewState extends State<ProductListScreenNew> {
   Widget _buildProductGridCard(Product product, ThemeData theme) {
     // Paleta moderna
     const Color primary = Color(0xFF1e40af);
-    const Color primaryHover = Color(0xFF1d4ed8);
     const Color accent = Color(0xFF059669);
-    const Color accentHover = Color(0xFF047857);
     const Color bgCard = Color(0xFFFFFFFF);
     const Color bgMuted = Color(0xFFf1f5f9);
     const Color textPrimary = Color(0xFF0f172a);
-    const Color textSecondary = Color(0xFF475569);
     const Color textMuted = Color(0xFF64748b);
     const Color border = Color(0xFFe2e8f0);
 

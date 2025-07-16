@@ -1,3 +1,16 @@
+
+CREATE OR ALTER PROCEDURE ContarUsuariosPorDominio
+AS
+BEGIN
+    SELECT 
+        SUBSTRING(Email, CHARINDEX('@', Email) + 1, LEN(Email)) AS Dominio,
+        COUNT(*) AS CantidadUsuarios
+    FROM Users
+    GROUP BY SUBSTRING(Email, CHARINDEX('@', Email) + 1, LEN(Email))
+    ORDER BY CantidadUsuarios DESC;
+END;
+EXEC ContarUsuariosPorDominio;
+
 CREATE OR ALTER PROCEDURE getProducts
     @FiltroGeneral NVARCHAR(200) = NULL,
     @CategoryId INT = NULL,
