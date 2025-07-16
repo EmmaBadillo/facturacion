@@ -25,24 +25,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     super.dispose();
   }
 
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'La nueva contraseña es obligatoria';
-    }
-    if (value.length < 6 || value.length > 10) {
-      return 'Debe tener entre 6 y 10 caracteres';
-    }
-    if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return 'Debe tener al menos una letra mayúscula';
-    }
-    if (!RegExp(r'[a-z]').hasMatch(value)) {
-      return 'Debe tener al menos una letra minúscula';
-    }
-    if (!RegExp(r'[!@#\$&*~%^()_\-+=\[\]{};:,.<>?/\\|]').hasMatch(value)) {
-      return 'Debe tener al menos un carácter especial';
-    }
-    return null;
-  }
+  // Sin validaciones locales, la API responde con el error correspondiente
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +87,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 onToggleVisibility: () => setState(() {
                   _obscureNewPassword = !_obscureNewPassword;
                 }),
-                validator: _validatePassword,
+                validator: null,
               ),
               const SizedBox(height: 16),
               _buildPasswordField(
@@ -115,15 +98,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 onToggleVisibility: () => setState(() {
                   _obscureConfirmPassword = !_obscureConfirmPassword;
                 }),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Confirma tu nueva contraseña';
-                  }
-                  if (value != _newPasswordController.text) {
-                    return 'Las contraseñas no coinciden';
-                  }
-                  return null;
-                },
+                validator: null,
               ),
             ],
           ),
@@ -250,7 +225,43 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   }
 
   Future<void> _changePassword() async {
-    if (!_formKey.currentState!.validate()) {
+    // Validación local: las contraseñas deben coincidir
+    if (_newPasswordController.text != _confirmPasswordController.text) {
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            backgroundColor: AppColors.backgroundLight,
+            title: Row(
+              children: [
+                Icon(
+                  Icons.error,
+                  color: Colors.red,
+                  size: 28,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'Error',
+                  style: TextStyle(color: AppColors.textPrimary),
+                ),
+              ],
+            ),
+            content: Text(
+              'Las contraseñas no coinciden.',
+              style: TextStyle(color: AppColors.textPrimary, fontFamily: 'monospace'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  'Aceptar',
+                  style: TextStyle(color: AppColors.accentColor),
+                ),
+              ),
+            ],
+          ),
+        );
+      }
       return;
     }
 
@@ -262,8 +273,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       final success = await ClientService.changePassword(
         newPassword: _newPasswordController.text,
       );
-
-      if (success) {
+      print(success);
+      if (success == true) {
         if (mounted) {
           showDialog(
             context: context,
@@ -305,11 +316,44 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           );
         }
       } else {
-        throw Exception('No se pudo cambiar la contraseña');
+        if (mounted) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              backgroundColor: AppColors.backgroundLight,
+              title: Row(
+                children: [
+                  Icon(
+                    Icons.error,
+                    color: Colors.red,
+                    size: 28,
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Error',
+                    style: TextStyle(color: AppColors.textPrimary),
+                  ),
+                ],
+              ),
+              content: Text(
+                'Ocurrió un error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.',
+                style: TextStyle(color: AppColors.textPrimary, fontFamily: 'monospace'),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(
+                    'Aceptar',
+                    style: TextStyle(color: AppColors.accentColor),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
       }
     } catch (e) {
       if (mounted) {
-        String errorMessage = e.toString().replaceAll('Exception: ', '');
         showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -329,8 +373,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ],
             ),
             content: Text(
-              errorMessage,
-              style: TextStyle(color: AppColors.textPrimary),
+              ' ${e.toString().replaceAll('Exception: ', '')}',
+              style: TextStyle(color: AppColors.textPrimary, fontFamily: 'monospace'),
             ),
             actions: [
               TextButton(

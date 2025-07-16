@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const clientController = require('../controllers/ClientController');
 router.get('/', clientController.getAll);
+router.get('/reporte', clientController.reporte);
+router.get('/correos', clientController.correos);
 router.get('/:id', clientController.getById);
 router.post('/', clientController.create);
 router.put('/', clientController.update);

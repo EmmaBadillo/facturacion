@@ -11,6 +11,27 @@ async function getAll(req, res) {
         res.status(500).json({ message: "Error al obtener clientes", error });
     }
 }
+async function reporte(req, res) {
+    try {
+        const clients = await clientService.reporte();
+        res.json(clients);
+    }
+    catch (error) {
+        await logErrorToDB('ClientController', 'reporte', error.message, error.stack);
+        res.status(500).json({ message: "Error al obtener clientes", error });
+    }
+}
+async function correos(req, res) {
+    try {
+        const clients = await clientService.correos();
+        res.json(clients);
+    }
+    catch (error) {
+        await logErrorToDB('ClientController', 'correos', error.message, error.stack);
+        res.status(500).json({ message: "Error al obtener clientes", error });
+    }
+}
+
 async function getById(req, res) {
     try {
         const clientId = req.params.id;
@@ -121,5 +142,7 @@ module.exports = {
     recoverPassword,
     enable,
     disable,
-    updatePicture
+    updatePicture,
+    reporte,
+    correos
 };

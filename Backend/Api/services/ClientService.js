@@ -12,6 +12,28 @@ async function getAllClients() {
   }
 
 }
+async function reporte() {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().execute('ContarUsuariosPorDominio');
+    return result.recordset;
+  } catch (error) {
+    await logErrorToDB('ClientService', 'ContarUsuariosPorDominio', error.message, error.stack);
+    throw error;
+  }
+
+}
+async function correos() {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().execute('ObtenerTodosLosCorreos');
+    return result.recordset;
+  } catch (error) {
+    await logErrorToDB('ClientService', 'ObtenerTodosLosCorreos', error.message, error.stack);
+    throw error;
+  }
+
+}
 async function getClientById(id) {
   try {
     const pool = await poolPromise;
@@ -129,4 +151,6 @@ module.exports = {
   enableClient,
   disableClient,
   updatePicture,
+  reporte,
+  correos
 };
